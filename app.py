@@ -24,16 +24,16 @@ def ask_question(question, context):
     return result
 
 # UI
-st.set_page_config(page_title="Real Estate Brochure QA", layout="centered")
-st.title("🏡 Real Estate Brochure Assistant")
+st.set_page_config(page_title="PDF QA", layout="centered")
+st.title("PDF Assistant")
 
-uploaded_file = st.file_uploader("Upload a brochure (PDF)", type="pdf")
+uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
 
 if uploaded_file:
     brochure_text = extract_text_from_pdf(uploaded_file)
-    st.success("✅ Brochure uploaded and processed!")
+    st.success("✅ PDF uploaded and processed!")
 
-    question = st.text_input("Ask a question about the property:")
+    question = st.text_input("Ask a question about the PDF:")
     
     if question:
         with st.spinner("🤖 Thinking..."):
@@ -41,4 +41,4 @@ if uploaded_file:
         st.markdown("### 🧠 Answer:")
         st.write(answer)
 else:
-    st.info("👆 Upload a property PDF to get started.")
+    st.info("👆 Upload a PDF to get started.")
