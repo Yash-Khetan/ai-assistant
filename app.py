@@ -12,8 +12,12 @@ qa_pipeline = load_model()
 # Extract text from uploaded PDF
 def extract_text_from_pdf(uploaded_file):
     reader = PdfReader(uploaded_file)
+    if (len(reader.pages) > 2):
+        st.error("Greater than max limit!! Upload a pdf of 2 page only! -- re upload")
+        st.stop()
     text = ""
     for page in reader.pages:
+        
         text += page.extract_text()
     return text
 
