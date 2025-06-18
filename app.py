@@ -25,6 +25,8 @@ def ask_question(question, context):
 
 # UI
 st.set_page_config(page_title="PDF QA", layout="centered")
+st.markdown("⚠️ *This tool is for demo use only. Do not upload confidential documents.*")
+
 st.title("PDF Assistant")
 
 uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
