@@ -41,4 +41,4 @@ if uploaded_file:
         st.markdown("### 🧠 Answer:")
         st.write(answer)
 else:
-    st.info("👆 Upload a PDF to get started.")
+    st.info("👆 Upload a PDF to get started(2 pages max).")
