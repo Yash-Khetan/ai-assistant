@@ -22,6 +22,28 @@ def log_session_interaction():
         writer.writerow([session_id, timestamp])
 
 
+import pandas as pd
+import os
+
+# Get the password from Streamlit secrets
+admin_password = st.secrets["admin"]["password"]
+
+admin_pass = st.sidebar.text_input("Enter admin key:", type="password")
+
+if admin_pass == admin_password:
+    show_logs = True
+    st.sidebar.success("🛠 Admin mode ON")
+else:
+    show_logs = False
+
+# Show logs only if admin mode is on
+if show_logs and os.path.exists("usage_log.csv"):
+    logs = pd.read_csv("usage_log.csv", names=["Session ID", "Timestamp"])
+    st.subheader("📊 Usage Logs")
+    st.dataframe(logs)
+
+
+
 # Load model (only once)
 @st.cache_resource
 def load_model():
