@@ -1,3 +1,9 @@
+
+
+import streamlit as st
+from PyPDF2 import PdfReader
+from transformers import pipeline
+
 import uuid
 import time
 import csv
@@ -15,9 +21,6 @@ def log_session_interaction():
         writer = csv.writer(file)
         writer.writerow([session_id, timestamp])
 
-import streamlit as st
-from PyPDF2 import PdfReader
-from transformers import pipeline
 
 # Load model (only once)
 @st.cache_resource
