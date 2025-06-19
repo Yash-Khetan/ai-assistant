@@ -1,3 +1,20 @@
+import uuid
+import time
+import csv
+from datetime import datetime
+
+# Generate a session ID once per user visit
+if "session_id" not in st.session_state:
+    st.session_state["session_id"] = str(uuid.uuid4())[:8]
+
+def log_session_interaction():
+    timestamp = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    session_id = st.session_state["session_id"]
+
+    with open("usage_log.csv", "a", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow([session_id, timestamp])
+
 import streamlit as st
 from PyPDF2 import PdfReader
 from transformers import pipeline
@@ -42,6 +59,7 @@ if uploaded_file:
     question = st.text_input("Ask a question about the PDF:")
     
     if question:
+        log_session_interaction()
         with st.spinner("🤖 Thinking..."):
             answer = ask_question(question, brochure_text)
         st.markdown("### 🧠 Answer:")
